@@ -1,0 +1,100 @@
+﻿@model CaliberMVC.Models.Employee
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+    /* styles.css */
+
+    /* Style for form container */
+    .form-container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    /* Style for form input fields */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+
+
+    /* Style for labels */
+    label {
+        font-weight: bold;
+    }
+
+    /* Style for radio buttons */
+    .radio-inline {
+        margin-right: 20px;
+    }
+
+    /* Style for submit button */
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+    .form-group {
+        width: 40%;
+    }
+
+    .create-form {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-wrap: wrap;
+        padding-top: 40px
+    }
+
+ </style>
+<form method="post" asp-controller="Employee" asp-action="Create" class="create-form">
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input type="text" id="Name" name="Name" class="form-control" placeholder="Enter Name" required />
+    </div>
+    <div class="form-group">
+            <label for="Email">Email</label>
+            <input name="Email" class="form-control" placeholder="Enter Email" required />
+        </div>
+        <div class="form-group">
+            <label for="DateOfBirth">Date of Birth</label>
+            <input name="DateOfBirth" class="form-control" type="date" required />
+        </div>
+        <div class="form-group">
+            <label for="ExperienceLevel">Experience Level</label>
+            <select name="ExperienceLevel" class="form-control" required>
+                <option value="">-- Select Experience Level --</option>
+                <option>Fresher</option>
+                <option>Senior</option>
+                <option>Manager</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Gender">Gender</label>
+            <div>
+                <label class="radio-inline">
+                    <input type="radio" name="Gender" value="Female" required /> Female
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="Gender" value="Male" required /> Male
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Address">Address</label>
+            <textarea name="Address" class="form-control" rows="3" required></textarea>
+        </div>
+
+        <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+</form>

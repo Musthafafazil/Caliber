@@ -1,0 +1,125 @@
+﻿@model CaliberMVC.Models.Employee
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@*@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Employee</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.EmployeeId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExperienceLevel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ExperienceLevel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ExperienceLevel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}*@
+
+
+<form method="post" asp-controller="Employee" asp-action="UpdateEmployee">
+    <div class="form-group" style="display: none;">
+        <label for="EmployeeId">Name</label>
+        <input type="text" id="EmployeeId" name="EmployeeId" class="form-control" placeholder="Enter Name" value="@Model.EmployeeId" required />
+    </div>
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input type="text" id="Name" name="Name" class="form-control" placeholder="Enter Name" value="@Model.Name" required />
+    </div>
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <input name="Email" class="form-control" placeholder="Enter Email" value="@Model.Email" required />
+    </div>
+    <div class="form-group">
+        <label for="DateOfBirth">Date of Birth</label>
+        <input name="DateOfBirth" class="form-control" type="date" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" required />
+    </div>
+    <div class="form-group">
+        <label for="ExperienceLevel">Experience Level</label>
+        <select name="ExperienceLevel" class="form-control" required>
+            <option value="">-- Select Experience Level --</option>
+            <option selected="@Model.ExperienceLevel == " Fresher"">Fresher</option>
+            <option selected="@Model.ExperienceLevel == " Senior"">Senior</option>
+            <option selected="@Model.ExperienceLevel == " Manager"">Manager</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="Gender">Gender</label>
+        <div>
+            <label class="radio-inline">
+                <input type="radio" name="Gender" value="Female" required @(Model.Gender == "Female" ? "checked" : "") /> Female
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="Gender" value="Male" required @(Model.Gender == "Male" ? "checked" : "") /> Male
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Address">Address</label>
+        <textarea name="Address" class="form-control" rows="3" required>@Model.Address</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,41 @@
+﻿@model CaliberMVC.Models.Employee
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<form method="post" asp-controller="Employee" asp-action="DeleteEmployee">
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input type="text" id="Name" name="Name" class="form-control" placeholder="Enter Name" value="@Model.Name" readonly />
+    </div>
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <input name="Email" class="form-control" placeholder="Enter Email" value="@Model.Email" readonly />
+    </div>
+    <div class="form-group">
+        <label for="DateOfBirth">Date of Birth</label>
+        <input name="DateOfBirth" class="form-control" type="date" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" readonly />
+    </div>
+    <div class="form-group">
+        <label for="ExperienceLevel">Experience Level</label>
+        <input name="ExperienceLevel" class="form-control" value="@Model.ExperienceLevel" readonly />
+    </div>
+    <div class="form-group">
+        <label for="Gender">Gender</label>
+        <input name="Gender" class="form-control" value="@Model.Gender" readonly />
+    </div>
+    <div class="form-group">
+        <label for="Address">Address</label>
+        <textarea name="Address" class="form-control" rows="3" readonly>@Model.Address</textarea>
+    </div>
+
+    <!-- Add a hidden input field to submit the EmployeeId -->
+    <input type="hidden" name="EmployeeId" value="@Model.EmployeeId" />
+
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+

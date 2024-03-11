@@ -1,0 +1,117 @@
+﻿
+<style>
+    input#search {
+        padding: 5px;
+        border-radius: 1px;
+        outline: none !important;
+        border: 1px solid #ccc;
+    }
+
+    table.table.table-hover td {
+        vertical-align: middle;
+    }
+
+    thead {
+        background-color: #838383;
+        color: #fff;
+        border-bottom: none;
+    }
+
+    td, th {
+        padding: 8px !important;
+    }
+    .header-action {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0px;
+    }
+
+    .create-btn {
+        height: max-content;
+    }
+    .form-group {
+        margin-bottom: 0px;
+    }
+    .action-btn{
+        width:48%;
+    }
+
+ 
+</style>
+
+
+@model IEnumerable<CaliberMVC.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="header-action">
+@Html.ActionLink("Create", "Create", "Employee", null, new { @class = "btn btn-primary create-btn" })
+
+@using (Html.BeginForm("Index", "Employee", FormMethod.Get))
+{
+    <div class="form-group">
+        @Html.TextBox("search", null, new { placeholder = "Search..." })
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+}
+</div>
+
+@if (Model.Any())
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Date Of Birth</th>
+                <th scope="col">Experience Level</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Address</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <td>@employee.Name</td>
+                    <td>@employee.Email</td>
+                    <td>@employee.DateOfBirth.ToString("yyyy-MM-dd")</td>
+                    <td>@employee.ExperienceLevel</td>
+                    <td>@employee.Gender</td>
+                    <td>@employee.Address</td>
+                    <td class="action-btns">
+                        @Html.ActionLink("Edit", "Edit", "Employee", new { ID = employee.EmployeeId }, new { @class = "btn btn-primary action-btn" })
+
+                        <!-- Delete button with Bootstrap classes -->
+                        @Html.ActionLink("Delete", "Delete", "Employee", new { ID = employee.EmployeeId }, new { @class = "btn btn-danger action-btn" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No records found.</p>
+}
+
+<!-- Pagination controls -->
+@{
+    int currentPage = ViewBag.CurrentPage ?? 1;
+    int totalPages = ViewBag.TotalPages ?? 1;
+}
+
+@if (totalPages > 1)
+{
+    <ul class="pagination">
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <li class="@(i == currentPage ? "active" : "")">
+                @Html.ActionLink(i.ToString(), "Index", new { page = i })
+            </li>
+        }
+    </ul>
+}
